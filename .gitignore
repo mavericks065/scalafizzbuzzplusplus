@@ -1,0 +1,8 @@
+scalafizzbuzzplusplus/target/
+scalafizzbuzzplusplus/.idea/
+scalafizzbuzzplusplus/project/project/
+scalafizzbuzzplusplus/project/target/
+scalafizzbuzzplusplus/spark-warehouse/
+scalafizzbuzzplusplus/*.iml
+scalafizzbuzzplusplus/.project
+
