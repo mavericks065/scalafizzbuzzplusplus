@@ -45,5 +45,25 @@ class StringCalculatorTest extends WordSpec with Matchers {
       // Then
       result shouldEqual 17
     }
+    "return the sum of 2 numbers if they are delimited by a NEW LINES" in {
+      // Given
+      val testString = "1\n1"
+
+      // When
+      val result = StringCalculator.add(testString)
+
+      // Then
+      result shouldEqual 2
+    }
+    "return the sum of the numbers if there are SEVERAL numbers in the String with NEW LINES" in {
+      // Given
+      val testString = "9,6,1\n1"
+
+      // When
+      val result = StringCalculator.add(testString)
+
+      // Then
+      result shouldEqual 17
+    }
   }
 }
