@@ -65,5 +65,15 @@ class StringCalculatorTest extends WordSpec with Matchers {
       // Then
       result shouldEqual 17
     }
+    "get the delimiter and do the sum of the numbers if there is no" in {
+      // Given
+      val testString = "//,\n9,1"
+
+      // When
+      val result = StringCalculator.add(testString)
+
+      // Then
+      result shouldEqual 10
+    }
   }
 }
