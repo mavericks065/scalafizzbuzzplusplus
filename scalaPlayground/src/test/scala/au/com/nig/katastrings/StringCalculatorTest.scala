@@ -75,5 +75,29 @@ class StringCalculatorTest extends WordSpec with Matchers {
       // Then
       result shouldEqual 10
     }
+    "throw an exception if number is negative" in {
+      // Given
+      val testString = "-9"
+
+      // When
+      val result = intercept[Exception]{
+        StringCalculator.add(testString)
+      }
+
+      // Then
+      result.getMessage shouldEqual "negatives: -9 not allowed"
+    }
+    "throw an exception if numbers are negative and write them all" in {
+      // Given
+      val testString = "-9,1,2,-2"
+
+      // When
+      val result = intercept[Exception]{
+        StringCalculator.add(testString)
+      }
+
+      // Then
+      result.getMessage shouldEqual "negatives: -9, -2 not allowed"
+    }
   }
 }
