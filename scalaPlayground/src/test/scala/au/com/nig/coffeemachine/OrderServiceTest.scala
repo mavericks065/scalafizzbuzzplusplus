@@ -1,6 +1,6 @@
 package au.com.nig.coffeemachine
 
-import au.com.nig.coffeemachine.model.{Coffee, HotChocolate, Message, Tea}
+import au.com.nig.coffeemachine.model._
 import org.scalatest.{Matchers, WordSpec}
 
 class OrderServiceTest extends WordSpec with Matchers {
@@ -20,6 +20,14 @@ class OrderServiceTest extends WordSpec with Matchers {
       invalidHotChocolateResult.isRight shouldBe true
       invalidHotChocolateResult.right.get shouldEqual Message("Amount paid is missing 0.3")
     }
+    "send back Messages when amt paid is less than the price of an orange juice" in {
+      // WHEN
+      val invalidOrangeJuiceResult = OrderService.isOrderValid(OrangeJuice(), BigDecimal.valueOf(0.2))
+
+      // THEN
+      invalidOrangeJuiceResult.isRight shouldBe true
+      invalidOrangeJuiceResult.right.get shouldEqual Message("Amount paid is missing 0.4")
+    }
     "send back the beverages when amt paid is correct" in {
       // WHEN
       val validTeaResult = OrderService.isOrderValid(Tea(0), BigDecimal.valueOf(0.4))
@@ -33,6 +41,14 @@ class OrderServiceTest extends WordSpec with Matchers {
       validCoffeeResult.left.get shouldEqual Coffee(0)
       validHotChocolateResult.isLeft shouldBe true
       validHotChocolateResult.left.get shouldEqual HotChocolate(0)
+    }
+    "send back an orange juice when amt paid is correct" in {
+      // WHEN
+      val validOrangeJuiceResult = OrderService.isOrderValid(OrangeJuice(), BigDecimal.valueOf(0.6))
+
+      // THEN
+      validOrangeJuiceResult.isLeft shouldBe true
+      validOrangeJuiceResult.left.get shouldEqual OrangeJuice()
     }
   }
 }

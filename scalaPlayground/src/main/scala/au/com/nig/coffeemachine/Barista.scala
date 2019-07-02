@@ -7,8 +7,8 @@ import au.com.nig.coffeemachine.model._
   */
 object Barista {
 
-  def makeBeverage(order: Order): Either[Beverage, Message] = if (order.request.getFirstPartOfCmd().startsWith("m"))
-    Right(Message(order.request.getSecondPartOfCommand()))
+  def makeBeverage(order: Order): Either[Beverage, Message] = if (order.request.getFirstLetterOfReq().startsWith("m"))
+    Right(Message(order.request.getSecondPartOfReq()))
   else
     Beverages.getType
     .andThen(OrderService.isOrderValid(_, order.amt))
