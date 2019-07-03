@@ -26,7 +26,7 @@ object Beverages {
       case _ => throw new Exception("not managed")
     }
   }
-
+  
   private def extractSugarsAndStick(command: Request): (Int, Boolean, Boolean) = {
     val sugars = if (command.getSecondPartOfReq().isEmpty)
       0

@@ -6,7 +6,7 @@ import au.com.nig.coffeemachine.model._
   * https://simcap.github.io/coffeemachine
   */
 object Barista {
-
+  
   def makeBeverage(order: Order): Either[Beverage, Message] = if (order.request.getFirstLetterOfReq().startsWith("m"))
     Right(Message(order.request.getSecondPartOfReq()))
   else
