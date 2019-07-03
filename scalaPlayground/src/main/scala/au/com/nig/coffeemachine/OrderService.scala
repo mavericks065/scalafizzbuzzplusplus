@@ -6,11 +6,13 @@ object OrderService {
 
   def isOrderValid(beverage: Beverage, amtPaid: BigDecimal): Either[Beverage, Message] = {
     beverage match {
-      case Tea(_, _, price) if amtPaid < price =>
+      case Tea(_, _, _, price) if amtPaid < price =>
         Right(Message(s"Amount paid is missing ${price - amtPaid}"))
-      case Coffee(_, _, price) if amtPaid < price =>
+      case Coffee(_, _, _, price) if amtPaid < price =>
         Right(Message(s"Amount paid is missing ${price - amtPaid}"))
-      case HotChocolate(_, _, price) if amtPaid < price =>
+      case HotChocolate(_, _, _, price) if amtPaid < price =>
+        Right(Message(s"Amount paid is missing ${price - amtPaid}"))
+      case OrangeJuice(price) if amtPaid < price =>
         Right(Message(s"Amount paid is missing ${price - amtPaid}"))
       case x => Left(x)
     }
