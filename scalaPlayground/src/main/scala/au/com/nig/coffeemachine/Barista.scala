@@ -6,11 +6,12 @@ import au.com.nig.coffeemachine.model._
   * https://simcap.github.io/coffeemachine
   */
 object Barista {
-  
-  def makeBeverage(order: Order): Either[Beverage, Message] = if (order.request.getFirstLetterOfReq().startsWith("m"))
-    Right(Message(order.request.getSecondPartOfReq()))
-  else
-    Beverages.getType
-    .andThen(OrderService.isOrderValid(_, order.amt))
-    .apply(order.request)
+
+  def makeBeverage(order: Order): Either[Beverage, Message] = {
+    OrderService.isOrderValid(order) match {
+      case Left(x) => Left(Beverages.getType(x.request))
+      case Right(y) => Right(y)
+    }
+  }
+
 }

@@ -26,5 +26,14 @@ class BaristaTest extends WordSpec with Matchers {
         case _ => fail("This is not a Message therefore it is wrong")
       }
     }
+    "throw an exception" in {
+      // WHEN
+      val result = intercept[BaristaException](
+        Barista.makeBeverage(Order(Request("D:should send an exception"), BigDecimal.valueOf(0)))
+      )
+
+      // THEN
+      result.getMessage shouldEqual "not managed"
+    }
   }
 }

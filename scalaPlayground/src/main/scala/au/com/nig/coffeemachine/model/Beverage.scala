@@ -10,6 +10,8 @@ case class Tea(sugars: Int, hasStick: Boolean = false, extraHot: Boolean = false
 
 case class OrangeJuice(price: BigDecimal = BigDecimal.valueOf(0.6)) extends Beverage
 
+case class BaristaException(msg: String) extends Exception(msg)
+
 object Beverages {
   def getType: Request => Beverage = request => {
     request.getFirstLetterOfReq() match {
@@ -23,10 +25,10 @@ object Beverages {
         val (sugars: Int, hasStick: Boolean, extraHot: Boolean) = extractSugarsAndStick(request)
         HotChocolate(sugars, hasStick, extraHot)
       case "o" => OrangeJuice()
-      case _ => throw new Exception("not managed")
+      case _ => throw BaristaException("not managed")
     }
   }
-  
+
   private def extractSugarsAndStick(command: Request): (Int, Boolean, Boolean) = {
     val sugars = if (command.getSecondPartOfReq().isEmpty)
       0
